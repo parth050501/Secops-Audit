@@ -1,0 +1,23 @@
+# CodeCore Collector (relay). Forwards agent results to the platform.
+# - Outbound HTTPS to the platform (APE).
+# - Inbound agent port (8514) on the INTERNAL network only.
+services:
+  collector:
+    build: .
+    container_name: codecore-collector
+    environment:
+      - APE_URL=${APE_URL:?set APE_URL, e.g. https://qc.codecoresystems.in}
+      - COLLECTOR_TOKEN=${COLLECTOR_TOKEN:?set the enrollment token from the console}
+      - ENROLL_SECRET=${ENROLL_SECRET:?set a strong shared secret for agent enrollment}
+      - INBOUND_PORT=${INBOUND_PORT:-8514}
+      - POLL_INTERVAL=${POLL_INTERVAL:-60}
+      - HEARTBEAT_INTERVAL=${HEARTBEAT_INTERVAL:-60}
+    ports:
+      # Expose the agent-facing port on the host (internal network).
+      - "${INBOUND_PORT:-8514}:8514"
+    volumes:
+      - collector_data:/var/lib/codecore
+    restart: unless-stopped
+
+volumes:
+  collector_data:

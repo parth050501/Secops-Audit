@@ -1,0 +1,32 @@
+# Caddy automatically obtains and renews a free HTTPS certificate for SITE_DOMAIN
+# from Let's Encrypt, as long as the domain's DNS A-record points at this server
+# and ports 80 + 443 are open.
+
+{$SITE_DOMAIN} {
+	# API and WebSocket traffic → backend
+	handle /api/* {
+		reverse_proxy backend:8000
+	}
+	handle /ws/* {
+		reverse_proxy backend:8000
+	}
+	handle /health {
+		reverse_proxy backend:8000
+	}
+
+	# Everything else → frontend (Next.js)
+	handle {
+		reverse_proxy frontend:3000
+	}
+
+	# Sensible security headers
+	header {
+		Strict-Transport-Security "max-age=31536000;"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+
+	encode gzip
+}

@@ -1,0 +1,3 @@
+requests==2.32.3
+# For postgres scanning (optional — only if scanning a Postgres on this host):
+# psycopg2-binary==2.9.9
