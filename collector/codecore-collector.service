@@ -1,0 +1,23 @@
+# systemd unit for running the collector directly (non-Docker option).
+# Place at /etc/systemd/system/codecore-collector.service, then:
+#   systemctl daemon-reload && systemctl enable --now codecore-collector
+[Unit]
+Description=CodeCore Collector Engine
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=collector
+EnvironmentFile=/etc/codecore/collector.env
+ExecStart=/usr/bin/python3 -m codecore_collector.engine
+Restart=always
+RestartSec=10
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/codecore
+
+[Install]
+WantedBy=multi-user.target
