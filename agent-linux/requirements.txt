@@ -1,0 +1,8 @@
+requests==2.32.3
+
+# Database scanning libraries — install only the ones you need, for whichever
+# databases this agent will scan (all optional; the OS scan needs none of these):
+#   Postgres:  psycopg2-binary==2.9.9
+#   MySQL:     pymysql==1.1.1
+#   MSSQL:     pymssql==2.3.0
+# e.g.:  pip install pymysql pymssql psycopg2-binary

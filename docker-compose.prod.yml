@@ -1,0 +1,83 @@
+# Production overrides. Use with:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+#
+# Differences from dev:
+#   - Caddy reverse proxy in front: automatic HTTPS, the ONLY public service
+#   - PostgreSQL instead of SQLite (durable, concurrent multi-tenant storage)
+#   - No --reload (reliable long-running scans, lower memory)
+#   - Requires real secrets via environment (no insecure defaults)
+#   - ENVIRONMENT=production (enforces bcrypt, hides QC banner)
+#
+# SECURITY: backend/frontend/postgres do NOT publish ports to the host here.
+# Only Caddy (80/443) is reachable from the internet. Containers talk to each
+# other over the internal Docker network.
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: secops-caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - SITE_DOMAIN=${SITE_DOMAIN:?SITE_DOMAIN must be set (your subdomain)}
+    depends_on:
+      - backend
+      - frontend
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: secops-postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:?POSTGRES_USER must be set}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}
+      - POSTGRES_DB=${POSTGRES_DB:-secops}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # No ports published — internal only
+
+  backend:
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports: []          # do not expose to host in production
+    environment:
+      - ENVIRONMENT=production
+      - JWT_SECRET=${JWT_SECRET:?JWT_SECRET must be set}
+      - SECOPS_ENCRYPTION_KEY=${SECOPS_ENCRYPTION_KEY:?SECOPS_ENCRYPTION_KEY must be set}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-secops}
+      - EVIDENCE_DIR=/app/data/evidence
+    volumes:
+      - backend_data:/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 3g
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    ports: []          # do not expose to host in production
+    environment:
+      - BACKEND_URL=http://backend:8000
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  caddy_data:
+  caddy_config:

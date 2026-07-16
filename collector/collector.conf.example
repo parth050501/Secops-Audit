@@ -1,0 +1,20 @@
+# CodeCore Collector (relay) configuration.
+# Copy to /etc/codecore/collector.conf, or set as environment variables.
+[collector]
+# Where the platform lives + the secret token from the console (per-tenant)
+ape_url = https://qc.codecoresystems.in
+token = PASTE_THE_ENROLLMENT_TOKEN_FROM_THE_CONSOLE
+
+# Shared secret that agents must present to enroll with THIS collector.
+# Set a strong random value; give it to your agents at install time.
+enroll_secret = CHANGE_ME_TO_A_STRONG_RANDOM_VALUE
+
+# Agent-facing server (internal network only — do NOT expose to the internet)
+inbound_host = 0.0.0.0
+inbound_port = 8514
+
+poll_interval = 60
+heartbeat_interval = 60
+verify_tls = true
+queue_path = /var/lib/codecore/queue.db
+agent_db_path = /var/lib/codecore/agents.db
