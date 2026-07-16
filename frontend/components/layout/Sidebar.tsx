@@ -2,7 +2,11 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { Shield, LayoutDashboard, Plug, AlertTriangle, Ticket, FileCheck, Settings, LogOut, Radio, ClipboardList, ShieldCheck, Building2, FolderCheck, Users, Server, BadgeCheck, Cpu, ChevronLeft, ChevronRight, CalendarClock, Library, Boxes } from 'lucide-react';
+=======
+import { Shield, LayoutDashboard, Plug, AlertTriangle, Ticket, FileCheck, Settings, LogOut, Radio, ClipboardList, ShieldCheck, Building2, FolderCheck, Users, Server, BadgeCheck, Cpu, ChevronLeft, ChevronRight, CalendarClock, Library } from 'lucide-react';
+>>>>>>> 8f526db18a4461ff76d81f7ca772f6b9a9d74df7
 import clsx from 'clsx';
 
 const FW_COLORS: any = {
@@ -14,7 +18,11 @@ const nav = [
   { label:'Dashboard',    href:'/dashboard',   icon: LayoutDashboard },
   { label:'Connectors',   href:'/connectors',  icon: Plug },
   { label:'Collectors',   href:'/collectors',  icon: Server },
+<<<<<<< HEAD
   { label:'Inventory',    href:'/inventory',   icon: Boxes },
+=======
+  { label:'Agents',       href:'/agents',      icon: Cpu },
+>>>>>>> 8f526db18a4461ff76d81f7ca772f6b9a9d74df7
   { label:'Scheduler',    href:'/scheduler',   icon: CalendarClock },
   { label:'Governance',   href:'/governance',  icon: AlertTriangle },
   { label:'Compliance',   href:'/compliance',  icon: BadgeCheck },

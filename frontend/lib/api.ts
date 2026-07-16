@@ -178,6 +178,7 @@ export const downloadControlsTemplate = async () => {
   URL.revokeObjectURL(url);
 };
 
+<<<<<<< HEAD
 // ── Devices (on-prem network devices) ──
 export const listDevices = () => api.get('/api/devices');
 export const deviceCatalog = () => api.get('/api/devices/catalog');
@@ -186,6 +187,8 @@ export const updateDevice = (id: number, data: any) => api.patch(`/api/devices/$
 export const deleteDevice = (id: number) => api.delete(`/api/devices/${id}`);
 export const scanDevice = (id: number) => api.post(`/api/devices/${id}/scan`);
 
+=======
+>>>>>>> 8f526db18a4461ff76d81f7ca772f6b9a9d74df7
 // ── Collectors (CCE) — platform/operator view ──
 export const platformListAllCollectors = () => platformApi.get('/api/collectors/platform/all');
 export const platformRegisterCollector = (data: any) => platformApi.post('/api/collectors/platform/register', data);

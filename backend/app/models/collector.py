@@ -17,7 +17,11 @@ type. ALL parsing/mapping lives in the APE (reusing the existing connector
 parsers), so changing compliance logic never requires updating deployed
 collectors.
 """
+<<<<<<< HEAD
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, JSON, Text, Boolean
+=======
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, JSON, Text
+>>>>>>> 8f526db18a4461ff76d81f7ca772f6b9a9d74df7
 from datetime import datetime, timedelta
 from app.core.database import Base
 
@@ -121,6 +125,7 @@ class AssetGroup(Base):
 
     created_at   = Column(DateTime, default=datetime.utcnow)
     updated_at   = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+<<<<<<< HEAD
 
 
 class NetworkDevice(Base):
@@ -160,3 +165,5 @@ class NetworkDevice(Base):
 
     created_at    = Column(DateTime, default=datetime.utcnow)
     updated_at    = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+=======
+>>>>>>> 8f526db18a4461ff76d81f7ca772f6b9a9d74df7

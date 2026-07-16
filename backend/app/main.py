@@ -6,7 +6,11 @@ from typing import Set, Dict
 
 from app.core.database import init_db
 from app.core.config import settings
+<<<<<<< HEAD
 from app.api.routes import auth, tenants, connectors, governance, tickets, auditor, ai, policies, platform, soc2, evidence, tenant_users, collector_admin, collector_ingest, cody_chat, scheduler, frameworks_admin, devices
+=======
+from app.api.routes import auth, tenants, connectors, governance, tickets, auditor, ai, policies, platform, soc2, evidence, tenant_users, collector_admin, collector_ingest, cody_chat, scheduler, frameworks_admin
+>>>>>>> 8f526db18a4461ff76d81f7ca772f6b9a9d74df7
 
 # WebSocket connection manager — connections are grouped per tenant so live
 # events are only ever sent to clients belonging to that tenant. Broadcasting
@@ -95,7 +99,10 @@ app.include_router(collector_ingest.router, prefix="/api/collector", tags=["coll
 app.include_router(cody_chat.router, prefix="/api/cody", tags=["cody"])
 app.include_router(scheduler.router, prefix="/api/scheduler", tags=["scheduler"])
 app.include_router(frameworks_admin.router, prefix="/api/frameworks", tags=["frameworks"])
+<<<<<<< HEAD
 app.include_router(devices.router, prefix="/api/devices", tags=["devices"])
+=======
+>>>>>>> 8f526db18a4461ff76d81f7ca772f6b9a9d74df7
 
 @app.websocket("/ws/events")
 async def websocket_events(ws: WebSocket, token: str = Query(None)):
