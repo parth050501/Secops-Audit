@@ -1,0 +1,12 @@
+# CodeCore Linux Agent configuration.
+# Copy to /etc/codecore/agent.conf, or set as environment variables.
+[agent]
+# The collector's agent endpoint (internal network)
+collector_url = http://10.0.0.10:8514
+# The shared enroll secret configured on that collector
+enroll_secret = THE_COLLECTORS_ENROLL_SECRET
+# Label for this agent (defaults to hostname if omitted)
+agent_name = app-server-01
+# Which scans this agent runs (comma list): linux, postgres
+scan_systems = linux
+verify_tls = true

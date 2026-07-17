@@ -1,0 +1,16 @@
+# Run the agent on a schedule via systemd timer (recommended).
+# Place this + codecore-agent.timer in /etc/systemd/system/, then:
+#   systemctl daemon-reload && systemctl enable --now codecore-agent.timer
+[Unit]
+Description=CodeCore Linux Agent (compliance scan)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/codecore/agent.env
+ExecStart=/usr/bin/python3 -m codecore_agent.agent --once
+User=root
+# Hardening (agent needs read access to system config; keep it least-privilege)
+NoNewPrivileges=true
+ProtectHome=true
