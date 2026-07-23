@@ -1,0 +1,8 @@
+# CodeCore Windows Agent configuration.
+# Copy to C:\ProgramData\CodeCore\agent.conf, or set as environment variables.
+[agent]
+collector_url = http://10.0.0.10:8514
+enroll_secret = THE_COLLECTORS_ENROLL_SECRET
+agent_name = win-app-01
+verify_tls = true
+ps_script = secops-win-assess.ps1
