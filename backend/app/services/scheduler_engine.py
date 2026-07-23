@@ -95,6 +95,7 @@ async def scheduler_loop():
         except Exception as e:
             # never let a bad pass kill the loop
             log.warning("scheduler pass failed: %s", e)
+<<<<<<< HEAD
         # scheduled report delivery (fail-safe; independent of scan groups)
         try:
             from app.core.database import AsyncSessionLocal
@@ -104,4 +105,6 @@ async def scheduler_loop():
                 log.info("delivered scheduled reports for %d tenant(s)", n)
         except Exception as e:
             log.warning("report delivery pass failed: %s", e)
+=======
+>>>>>>> e92200eb629e646833d5267d624ea079b89643af
         await asyncio.sleep(CHECK_INTERVAL_SECONDS)

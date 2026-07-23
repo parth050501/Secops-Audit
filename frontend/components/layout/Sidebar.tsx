@@ -2,7 +2,11 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { Shield, LayoutDashboard, Plug, AlertTriangle, Ticket, FileCheck, Settings, LogOut, Radio, ClipboardList, ShieldCheck, Building2, FolderCheck, Users, Server, BadgeCheck, Cpu, ChevronLeft, ChevronRight, CalendarClock, Library, Boxes, FileText, Bell } from 'lucide-react';
+=======
+import { Shield, LayoutDashboard, Plug, AlertTriangle, Ticket, FileCheck, Settings, LogOut, Radio, ClipboardList, ShieldCheck, Building2, FolderCheck, Users, Server, BadgeCheck, Cpu, ChevronLeft, ChevronRight, CalendarClock, Library, Boxes } from 'lucide-react';
+>>>>>>> e92200eb629e646833d5267d624ea079b89643af
 import clsx from 'clsx';
 
 const FW_COLORS: any = {
@@ -19,7 +23,10 @@ const nav = [
   { label:'Governance',   href:'/governance',  icon: AlertTriangle },
   { label:'Compliance',   href:'/compliance',  icon: BadgeCheck },
   { label:'Posture',      href:'/compliance-posture', icon: ShieldCheck },
+<<<<<<< HEAD
   { label:'Reporting',    href:'/reporting',   icon: FileText },
+=======
+>>>>>>> e92200eb629e646833d5267d624ea079b89643af
   { label:'Frameworks',   href:'/frameworks',  icon: Library },
   { label:'Policies',     href:'/policies',    icon: ClipboardList },
   { label:'SOC 2',        href:'/soc2',        icon: ShieldCheck },
@@ -27,7 +34,10 @@ const nav = [
   { label:'Tickets',      href:'/tickets',     icon: Ticket },
   { label:'Auditor View', href:'/auditor',     icon: FileCheck },
   { label:'Team',         href:'/users',       icon: Users },
+<<<<<<< HEAD
   { label:'Notifications',href:'/notifications',icon: Bell },
+=======
+>>>>>>> e92200eb629e646833d5267d624ea079b89643af
   { label:'Settings',     href:'/settings',    icon: Settings, roles:['admin'] },
 ];
 

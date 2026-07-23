@@ -29,7 +29,11 @@ async def init_db():
     from app.models import (  # noqa
         user, tenant, connector, device, event, ticket, audit_log,
         ai_usage, custom_policy, platform, soc2, evidence, collector,
+<<<<<<< HEAD
         framework, platform_settings, compliance_snapshot, notification_prefs, report_schedule,  # noqa
+=======
+        framework, platform_settings, compliance_snapshot,  # noqa
+>>>>>>> e92200eb629e646833d5267d624ea079b89643af
         # devices live in collector module (Device)
     )
     async with engine.begin() as conn:

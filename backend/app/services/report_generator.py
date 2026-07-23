@@ -299,6 +299,7 @@ def generate_excel_report(report: dict) -> bytes:
 def _truncate(s: str, n: int) -> str:
     s = s or ""
     return s if len(s) <= n else s[:n-1] + "…"
+<<<<<<< HEAD
 
 
 # ── LEVELED REPORTS (CISO / engineer / auditor) ──────────────────────────────
@@ -399,3 +400,5 @@ def generate_leveled_pdf(report: dict) -> bytes:
                        "Scanned checks cover machine-verifiable controls; other controls require human-attested evidence.", small))
     doc.build(e)
     return buf.getvalue()
+=======
+>>>>>>> e92200eb629e646833d5267d624ea079b89643af

@@ -197,6 +197,7 @@ export const platformRegisterCollector = (data: any) => platformApi.post('/api/c
 
 // ── Cody AI assistant ──
 export const askCody = (message: string, history: any[]) => api.post('/api/cody/chat', { message, history });
+<<<<<<< HEAD
 
 // ── Reports (audience-level compliance reports) ──
 export const getReportLevels = () => api.get('/api/reports/levels');
@@ -226,3 +227,5 @@ export const downloadStoredReport = async (id: number, title = 'report') => {
   const a = document.createElement('a'); a.href = url; a.download = `${title.replace(/\s+/g,'_')}.pdf`; a.click();
   URL.revokeObjectURL(url);
 };
+=======
+>>>>>>> e92200eb629e646833d5267d624ea079b89643af
